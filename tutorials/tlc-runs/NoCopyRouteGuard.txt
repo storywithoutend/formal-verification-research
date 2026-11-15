@@ -1,0 +1,20 @@
+# NoCopyRouteGuard: trimmed excerpt. Full state dumps removed; only fields that changed between states are shown.
+TLC2 Version 2.19 of 08 August 2024 (rev: 5a47802)
+Running breadth-first search Model-Checking with fp 0 with 1 worker on 8 cores with 3557MB heap and 64MB offheap memory (Linux 6.12.113+ amd64, Eclipse Adoptium 21.0.13 x86_64, MSBDiskFPSet, DiskStateQueue).
+Starting... (2026-11-15 12:28:31)
+Computing initial states...
+Finished computing initial states: 1 distinct state generated at 2026-11-15 12:28:31.
+Error: Invariant E4_CopyRequiresRoute is violated.
+Error: The behavior up to this point is:
+State 1: <Initial predicate>
+State 2: <E4CopyRoute line 754, col 3 to line 766, col 28 of module Model>
+2 states generated, 2 distinct states found, 0 states left on queue.
+The depth of the complete state graph search is 2.
+Finished in 00s at (2026-11-15 12:28:31)
+exit=12
+
+# Fields that changed from State 1 to State 2 (all other fields unchanged):
+  copied: FALSE  ->  TRUE
+  copyRouteExists: TRUE  ->  FALSE
+  phase: 0  ->  99
+  scenario (both states): "E4"
