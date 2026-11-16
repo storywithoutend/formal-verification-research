@@ -1,0 +1,6 @@
+name = "ens-lean-example"
+version = "0.1.0"
+defaultTargets = ["EnsExample"]
+
+[[lean_lib]]
+name = "EnsExample"

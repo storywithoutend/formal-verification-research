@@ -1,0 +1,10 @@
+✔ [2/5] Built EnsExample.Registry (359ms)
+ℹ [3/5] Built EnsExample.Concrete (302ms)
+info: EnsExample/Concrete.lean:14:0: [0, 1, 2]
+info: EnsExample/Concrete.lean:15:0: [0, 1]
+info: EnsExample/Concrete.lean:45:0: 'EnsExample.root_walk_certified' depends on axioms: [propext]
+info: EnsExample/Concrete.lean:46:0: 'EnsExample.safeSetSub_preserves' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: EnsExample/Concrete.lean:47:0: 'EnsExample.hijacked_visits_foreign' depends on axioms: [propext, Quot.sound]
+info: EnsExample/Concrete.lean:48:0: 'EnsExample.demo_walk_native' depends on axioms: [demo_walk_native._native.native_decide.ax_1_1]
+✔ [4/5] Built EnsExample (260ms)
+Build completed successfully (5 jobs).

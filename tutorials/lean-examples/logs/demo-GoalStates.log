@@ -1,0 +1,47 @@
+w : World
+hinv : CertifiedLinksOnlyCertified w
+labels : List Label
+⊢ ∀ (r : RegId), isCertified w r = true → ∀ (x : RegId), x ∈ walk w r labels → isCertified w x = true
+case nil
+w : World
+hinv : CertifiedLinksOnlyCertified w
+r : RegId
+hr : isCertified w r = true
+x : RegId
+hx : x ∈ walk w r []
+⊢ isCertified w x = true
+case nil
+w : World
+hinv : CertifiedLinksOnlyCertified w
+r : RegId
+hr : isCertified w r = true
+x : RegId
+hx : x = r
+⊢ isCertified w x = true
+case cons
+w : World
+hinv : CertifiedLinksOnlyCertified w
+l : Label
+ls : List Label
+ih : ∀ (r : RegId), isCertified w r = true → ∀ (x : RegId), x ∈ walk w r ls → isCertified w x = true
+r : RegId
+hr : isCertified w r = true
+x : RegId
+hx : x ∈ walk w r (l :: ls)
+⊢ isCertified w x = true
+case cons.some.some
+w : World
+hinv : CertifiedLinksOnlyCertified w
+l : Label
+ls : List Label
+ih : ∀ (r : RegId), isCertified w r = true → ∀ (x : RegId), x ∈ walk w r ls → isCertified w x = true
+r : RegId
+hr : isCertified w r = true
+x : RegId
+reg : Registry
+hw : w r = some reg
+hcert : reg.certified = true
+child : RegId
+hl : List.lookup l reg.subs = some child
+hx : x = r ∨ x ∈ walk w child ls
+⊢ isCertified w x = true

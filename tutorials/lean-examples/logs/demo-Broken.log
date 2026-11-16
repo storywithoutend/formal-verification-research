@@ -1,0 +1,8 @@
+demos/Broken.lean:27:34: error: Application type mismatch: The argument
+  hr
+has type
+  isCertified w r = true
+but is expected to have type
+  isCertified w child = true
+in the application
+  ih child hr

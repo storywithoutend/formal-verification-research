@@ -1,0 +1,4 @@
+demos/Escapes.lean:5:8: warning: declaration uses `sorry`
+'EnsExample.claimed_with_sorry' depends on axioms: [sorryAx]
+'EnsExample.uses_assumption' depends on axioms: [propext, CertifiedRegistryPathAssumed]
+'EnsExample.vacuous' depends on axioms: [propext]
