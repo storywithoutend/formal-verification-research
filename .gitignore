@@ -1,0 +1,16 @@
+# Project-local tools and dependencies
+experiments/.tools/
+**/node_modules/
+
+# TLC / Apalache generated state and temporary trace replay files
+**/states/
+experiments/retry-queue/.tmp/
+experiments/retry-queue/model/generated/
+
+# Test and mutation output (curated summaries under results/ are committed)
+**/coverage/
+**/.stryker-tmp/
+experiments/retry-queue/reports/
+
+# OS/editor noise
+.DS_Store
