@@ -1,0 +1,96 @@
+[
+  {
+    "phase": {
+      "alice.eth": "queued",
+      "bob.eth": "queued"
+    },
+    "owners": {
+      "alice.eth": [],
+      "bob.eth": []
+    },
+    "attempts": {
+      "alice.eth": 0,
+      "bob.eth": 0
+    },
+    "submissions": {
+      "alice.eth": 0,
+      "bob.eth": 0
+    },
+    "event": {
+      "kind": "init",
+      "job": null,
+      "worker": null
+    }
+  },
+  {
+    "phase": {
+      "alice.eth": "leased",
+      "bob.eth": "queued"
+    },
+    "owners": {
+      "alice.eth": [
+        "worker-a"
+      ],
+      "bob.eth": []
+    },
+    "attempts": {
+      "alice.eth": 1,
+      "bob.eth": 0
+    },
+    "submissions": {
+      "alice.eth": 0,
+      "bob.eth": 0
+    },
+    "event": {
+      "kind": "lease",
+      "job": "alice.eth",
+      "worker": "worker-a"
+    }
+  },
+  {
+    "phase": {
+      "alice.eth": "submitted",
+      "bob.eth": "queued"
+    },
+    "owners": {
+      "alice.eth": [],
+      "bob.eth": []
+    },
+    "attempts": {
+      "alice.eth": 1,
+      "bob.eth": 0
+    },
+    "submissions": {
+      "alice.eth": 1,
+      "bob.eth": 0
+    },
+    "event": {
+      "kind": "submit",
+      "job": "alice.eth",
+      "worker": "worker-a"
+    }
+  },
+  {
+    "phase": {
+      "alice.eth": "submitted",
+      "bob.eth": "queued"
+    },
+    "owners": {
+      "alice.eth": [],
+      "bob.eth": []
+    },
+    "attempts": {
+      "alice.eth": 1,
+      "bob.eth": 0
+    },
+    "submissions": {
+      "alice.eth": 2,
+      "bob.eth": 0
+    },
+    "event": {
+      "kind": "submit",
+      "job": "alice.eth",
+      "worker": "worker-a"
+    }
+  }
+]
