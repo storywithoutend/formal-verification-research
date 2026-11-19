@@ -1,16 +1,21 @@
 # TypeScript and test summary
 
 Run on 2026-11-19 with Node `24.22.1`, npm `11.19.1`, TypeScript `5.9.3`,
-Effect `3.22.4`, Vitest `4.1.12`, and fast-check `4.10.3`.
+Effect `3.22.4`, `@effect/opentelemetry` `0.64.2`, OpenTelemetry SDK `2.12.0`,
+Vitest `4.1.12`, and fast-check `4.10.3`.
 
 ```text
 npm run typecheck
   passed (tsc --noEmit)
 
 npm test
+  8 test files passed
+  37 tests passed
+  duration 4.59s
+
+npm run test:otel
   4 test files passed
-  14 tests passed
-  duration 3.66s
+  23 tests passed
 ```
 
 Coverage by behavior:
@@ -23,8 +28,14 @@ Coverage by behavior:
 - fast-check executes 200 model-based command runs with seed `20261119`,
   comparing the Effect state after every accepted command with the executable
   abstract transition function;
-- TLC-backed tests accept one good trace and reject all four planted-fault
-  traces.
+- TLC-backed tests accept one good retained trace and reject all four planted
+  bad trace fixtures;
+- OpenTelemetry-derived traces match the retained trace for three fixed seeds
+  and feed the same TypeScript and TLC validators;
+- controlled tests cover concurrent timestamp reordering, start/end/commit event
+  placement, sampling, dropped events, and fiber interruption;
+- four real faulty queue implementations are rejected by span validation and by
+  independent targeted fast-check properties.
 
 `npm audit --omit=dev` reported zero production dependency vulnerabilities.
 The npm audit for the development toolchain reported advisories in transitive

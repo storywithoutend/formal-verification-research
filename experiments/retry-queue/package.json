@@ -10,6 +10,7 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:model": "vitest run test/model-based.test.ts",
+    "test:otel": "vitest run test/otel-trace.test.ts test/otel-failure-modes.test.ts test/otel-faulty-queues.test.ts test/otel-mutation.test.ts",
     "trace:generate": "tsx src/demo.ts",
     "trace:validate": "tsx src/validate-trace-cli.ts results/good-trace.json",
     "trace:validate-all": "tsx src/validate-fixtures.ts",
