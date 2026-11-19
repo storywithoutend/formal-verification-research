@@ -36,13 +36,13 @@ export interface RenewalQueue {
   readonly trace: Effect.Effect<readonly AbstractState[]>
 }
 
-const commandAttributes = (command: Command): Record<string, string> => ({
+export const commandAttributes = (command: Command): Record<string, string> => ({
   "retry_queue.action": command.kind,
   "retry_queue.job": command.job,
   "retry_queue.worker": "worker" in command ? command.worker : "<none>"
 })
 
-const recordTransitionEvent = (
+export const recordTransitionEvent = (
   span: Tracer.Span,
   timestamp: bigint,
   sequence: number,
