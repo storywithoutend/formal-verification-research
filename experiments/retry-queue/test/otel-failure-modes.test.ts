@@ -47,6 +47,22 @@ const interruptedStep = (placement: TraceEventPlacement) =>
     })
   )
 
+const interruptCommitBeforeStateChange = () =>
+  captureSpans(
+    Effect.gen(function*() {
+      const entered = yield* Deferred.make<void>()
+      const queue = yield* makeRenewalQueue({
+        beforeCommit: () => Deferred.succeed(entered, undefined).pipe(
+          Effect.zipRight(Effect.never)
+        )
+      })
+      const fiber = yield* queue.execute(leaseAlice).pipe(Effect.fork)
+      yield* Deferred.await(entered)
+      yield* Fiber.interrupt(fiber)
+      return yield* queue.trace
+    })
+  )
+
 const runSuccessfulTrace = () =>
   captureSpans(
     Effect.gen(function*() {
@@ -120,6 +136,13 @@ describe("OpenTelemetry trace failure modes", () => {
     expect((await validateTraceWithTlc(spanTrace, "otel-span-end-missing")).ok).toBe(true)
     expect(tracesMatch(spanTrace, captured.value)).toBe(false)
   }, 30_000)
+
+  it("commit recording emits nothing when cancellation wins before the state update", async () => {
+    const captured = await Effect.runPromise(interruptCommitBeforeStateChange())
+    const spanTrace = spansToTrace(captured.spans)
+    expect(captured.value).toHaveLength(1)
+    expect(spanTrace).toEqual(captured.value)
+  })
 
   it("commit recording survives cancellation after the atomic state update", async () => {
     const captured = await Effect.runPromise(interruptedStep("commit"))
