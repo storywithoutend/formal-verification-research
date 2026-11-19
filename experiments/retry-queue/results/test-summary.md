@@ -11,11 +11,12 @@ npm run typecheck
 npm test
   8 test files passed
   37 tests passed
-  duration 4.59s
+  duration 13.30s
 
 npm run test:otel
   4 test files passed
   23 tests passed
+  duration 8.88s
 ```
 
 Coverage by behavior:
@@ -29,7 +30,8 @@ Coverage by behavior:
   comparing the Effect state after every accepted command with the executable
   abstract transition function;
 - TLC-backed tests accept one good retained trace and reject all four planted
-  bad trace fixtures;
+  bad trace fixtures; Vitest files run serially to avoid resource races between
+  concurrent TLC JVMs;
 - OpenTelemetry-derived traces match the retained trace for three fixed seeds
   and feed the same TypeScript and TLC validators;
 - controlled tests cover concurrent timestamp reordering, start/end/commit event

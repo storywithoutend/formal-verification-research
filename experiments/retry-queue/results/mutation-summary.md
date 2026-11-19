@@ -12,7 +12,7 @@ separately by TLC, trace replay, fault fixtures, and fast-check.
 0 survived
 0 had no coverage
 mutation score: 100.00% (29 / 29 runtime-valid mutants)
-duration: 36 seconds
+duration: 38 seconds
 ```
 
 The Stryker Vitest configuration includes the original queue/model-based tests
