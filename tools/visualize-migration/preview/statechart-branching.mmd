@@ -1,0 +1,87 @@
+---
+title: "ENS manager migration: what today's code can do (A1, A5, A7, C5)"
+---
+stateDiagram-v2
+  state "Legend" as legend {
+    lg0: ready
+    lg1: running
+    lg2: blocked
+    lg3: complete
+    lg4: failure
+    lg5: untruthful
+    lg6: settled
+    lg7: Breaks A1_OneExecutionPerScope or A5_PendingAttemptNeverReprompts or C5_OutcomeAndViewsAreTruthful
+    lg8: Path to the A1_OneExecutionPerScope or A5_PendingAttemptNeverReprompts or C5_OutcomeAndViewsAreTruthful bug
+  }
+  class lg0 blue
+  class lg1 yellow
+  class lg2 orange
+  class lg3 teal
+  class lg4 pink
+  class lg5 orange
+  class lg6 tan
+  class lg7 breaks
+  class lg8 bugPath
+  state "Two tabs, one migration" as s0 {
+    s1: Ready
+    s2: The first tab is waiting on the wallet
+    s3: Both tabs have a wallet prompt
+    [*] --> s1
+  }
+  state "The receipt never comes back" as s4 {
+    s5: Ready
+    s6: Receipt missing, and a second wallet prompt already went out
+    [*] --> s5
+  }
+  state "You reject the wallet prompt" as s7 {
+    s8: Ready
+    s9: Prompt rejected, intent dropped, recovery kept
+    [*] --> s8
+  }
+  state "The run finishes and the app reports an outcome" as s10 {
+    s11: Ready
+    s12: Reported that nothing landed, but a name already did
+    s13: Reported success, but only one name landed
+    s14: Reported that nothing landed
+    s15: Reported a full success (both names landed)
+    s16: Reported that you cancelled
+    [*] --> s11
+  }
+  [*] --> s0
+  [*] --> s4
+  [*] --> s7
+  [*] --> s10
+  s1 --> s2: the first tab opens a wallet prompt
+  s5 --> s6: the receipt is unavailable and another prompt opens
+  s8 --> s9: you reject the wallet prompt
+  s11 --> s12: the app reports that nothing landed, but a name already did
+  s11 --> s13: the app reports success after only one name landed
+  s11 --> s14: the app reports that nothing landed
+  s11 --> s15: the app reports a full success
+  s11 --> s16: the app reports that you cancelled
+  s2 --> s3: a second tab starts the same migration
+  classDef breaks fill:#ffecee,stroke:#e72e3b,stroke-width:2.5px,color:#cd2834
+  class s1 blue
+  class s1 bugPath
+  class s2 yellow
+  class s2 bugPath
+  class s3 orange
+  class s3 breaks
+  class s3 bugPath
+  class s5 blue
+  class s5 bugPath
+  class s6 orange
+  class s6 breaks
+  class s6 bugPath
+  class s8 blue
+  class s9 pink
+  class s11 blue
+  class s11 bugPath
+  class s12 orange
+  class s12 breaks
+  class s13 orange
+  class s13 breaks
+  class s13 bugPath
+  class s14 tan
+  class s15 teal
+  class s16 pink
