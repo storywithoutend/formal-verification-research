@@ -1,0 +1,10 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "tlaplus",
+      "request": "launch",
+      "name": "Debug Model (open Graph-CORE.cfg or Model.tla first)"
+    }
+  ]
+}
